@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <global>
+        <modules>
+            <m4u_florian>
+                <version>0.1.0</version>
+            </m4u_florian>
+        </modules>
+        <blocks>
+            <florian>
+                <rewrite>
+                    <position>M4U_Florian_Block_Position</position>
+                </rewrite>
+            </florian>
+        </blocks>
+    </global>
+    <frontend>
+        <routers>
+            <florian>
+                <use>standard</use>
+                <args>
+                    <module>M4U_Florian</module>
+                    <frontName>helloworld</frontName>
+                </args>
+            </florian>
+        </routers>
+        <layout>
+            <updates>
+                <florian>
+                    <file>helloworld.xml</file>
+                </florian>
+            </updates>
+        </layout>
+    </frontend>
+</config>
