@@ -1,0 +1,37 @@
+app/etc/local.xml
+downloader/.cache/*
+downloader/cache.cfg
+downloader/connect.cfg
+delta
+deltaold
+docs
+media/*
+!media/wysiwyg
+port
+var/*
+*.sh
+.htaccess
+error_log
+
+# IDEs
+.idea/
+nbproject
+.sublime-project
+.sublime-workspace
+
+# Mac / OS X
+._*
+.AppleDouble
+.DS_Store
+.LSOverride
+
+# Windows
+$RECYCLE.BIN/
+Desktop.ini
+Thumbs.db
+
+# Vagrant
+/.chef/*
+/.vagrant/*
+/vagrantfile
+/vagrant.sql
