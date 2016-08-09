@@ -4374,6 +4374,10 @@ p.product-name a:hover {
     width: 30.8642%;
     margin-right: 3.7037%;
   }
+  .products-grid > li.hello {
+    width: 15.8642%;;
+    margin-right: 3.7037%;
+  }
   .products-grid > li:nth-child(3n+1) {
     clear: left;
   }

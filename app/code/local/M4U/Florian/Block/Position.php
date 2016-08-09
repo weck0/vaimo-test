@@ -6,12 +6,17 @@
     public function _getProductCollection()
     {
         $this->_params = $this->getRequest()->getParams();
-        Mage::log($this->_params,null,'florian.log');
+
+        if($this->_params['pos'] == 'desc'){
+            $pos = 'DESC';
+        }else{
+            $pos = 'ASC';
+        }
 
         $collection = Mage::getModel('catalog/product')->getCollection()
             ->addAttributeToSelect('*')
             ->addAttributeToFilter('cat_position', array('nlike' => ''))
-            ->addAttributeToSort('cat_position', 'ASC');
+            ->addAttributeToSort('cat_position', $pos);
 
 
         return $collection;
