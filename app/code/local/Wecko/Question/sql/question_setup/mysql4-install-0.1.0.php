@@ -12,9 +12,9 @@ $installer->run("
 DROP TABLE IF EXISTS {$this->getTable('question')};
 CREATE TABLE {$this->getTable('question')} (
 `question_id` int(11) unsigned NOT NULL auto_increment,
-`title` varchar(255),
+`name` varchar(255),
+`email` text,
 `content` text,
-`status` smallint(6),
 `created_time` datetime,
 `update_time` datetime,
 PRIMARY KEY (`question_id`)
