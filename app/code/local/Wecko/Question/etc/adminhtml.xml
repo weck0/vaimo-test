@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <question module="question">
+            <title>Question</title>
+            <sort_order>71</sort_order>
+            <children>
+                <items module="question">
+                    <title>Manage Questions</title>
+                    <sort_order>0</sort_order>
+                    <action>Question/adminhtml_Question</action>
+                </items>
+            </children>
+        </question>
+    </menu>
+    <acl>
+        <resources>
+            <all>
+                <title>Allow Everything</title>
+            </all>
+            <admin>
+                <children>
+                    <question>
+                        <title>Question Module</title>
+                        <sort_order>200</sort_order>
+                    </question>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <layout>
+        <updates>
+            <question>
+                <file>question.xml</file>
+            </question>
+        </updates>
+    </layout>
+</config>
