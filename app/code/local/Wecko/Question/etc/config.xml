@@ -49,6 +49,14 @@
                     </question>
                 </entities>
             </question_mysql4>
+            <question_resource>
+                <class>Wecko_Question_Model_Resource</class>
+                <entities>
+                    <question>
+                        <table>question</table>
+                    </question>
+                </entities>
+            </question_resource>
         </models>
         <resources>
             <question_setup>
