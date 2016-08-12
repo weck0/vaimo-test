@@ -21,10 +21,12 @@ class Wecko_Question_Block_Adminhtml_Question_Edit extends Mage_Adminhtml_Block_
     public function getHeaderText()
     {
         if( Mage::registry('question_data') && Mage::registry('question_data')->getId() ) {
-        return Mage::helper('question')->__("Edit Item '%s'", $this->htmlEscape(Mage::registry('question_data')->getTitle()));
+        return Mage::helper('question')->__("Edit Item '%s'", $this->htmlEscape(Mage::registry('question_data')->getName()));
         } else {
-            return Mage::helper('question')->__('Add Item');
+            return Mage::helper('question')->__('Add Question');
         }
+
+
     }
 
 }

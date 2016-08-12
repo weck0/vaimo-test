@@ -18,6 +18,20 @@ class Wecko_Question_Block_Adminhtml_Question_Grid extends Mage_Adminhtml_Block_
         $this->setSaveParametersInSession(true);
     }
 
+    protected function _prepareMassaction()
+    {
+        $this->setMassactionIdField('question_id');
+        $this->getMassactionBlock()->setFormFieldName('question_id');
+
+        $this->getMassactionBlock()->addItem('delete', array(
+            'label'=> Mage::helper('question')->__('Delete'),
+            'url'  => $this->getUrl('*/*/massDelete', array('' => '')),        // public function massDeleteAction() in Mage_Adminhtml_Tax_RateController
+            'confirm' => Mage::helper('question')->__('Are you sure?')
+        ));
+
+        return $this;
+    }
+
     protected function _prepareCollection()
     {
         $collection = Mage::getModel('question/question')->getCollection();
@@ -27,6 +41,8 @@ class Wecko_Question_Block_Adminhtml_Question_Grid extends Mage_Adminhtml_Block_
 
     protected function _prepareColumns()
     {
+        $helper = Mage::helper('question');
+
         $this->addColumn('question_id', array(
         'header' => Mage::helper('question')->__('ID'),
         'align' =>'right',
@@ -69,7 +85,7 @@ class Wecko_Question_Block_Adminhtml_Question_Grid extends Mage_Adminhtml_Block_
 
     public function getRowUrl($row)
     {
-        return $this->getUrl('*/*/edit', array('id' => $row->getId()));
+        return $this->getUrl('*/*/edit', array('id' => $row->getQuestionId()));
     }
     
 }

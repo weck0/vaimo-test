@@ -94,6 +94,30 @@ class Wecko_Question_Adminhtml_QuestionController extends Mage_Adminhtml_Control
         $this->_redirect('*/*/');
     }
 
+    public function massDeleteAction()
+    {
+        $questionIds = $this->getRequest()->getParam('question_id');
+        if(!is_array($questionIds)) {
+            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('question')->__('Please select question(s).'));
+        } else {
+            try {
+                $questionModel = Mage::getModel('question/question');
+                foreach ($questionIds as $questionId) {
+                    $questionModel->load($questionId)->delete();
+                }
+                Mage::getSingleton('adminhtml/session')->addSuccess(
+                    Mage::helper('question')->__(
+                        'Total of %d record(s) were deleted.', count($questionIds)
+                    )
+                );
+            } catch (Exception $e) {
+                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+            }
+        }
+
+        $this->_redirect('*/*/index');
+    }
+
     /**
     * Product grid for AJAX request.
     * Sort and filter result for example.
