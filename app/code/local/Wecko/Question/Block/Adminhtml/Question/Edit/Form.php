@@ -12,7 +12,7 @@ class Wecko_Question_Block_Adminhtml_Question_Edit_Form extends Mage_Adminhtml_B
     {
         $form = new Varien_Data_Form();
         $this->setForm($form);
-        $fieldset = $form->addFieldset('question_form', array('legend'=>Mage::helper('question')->__('Item information')));
+        $fieldset = $form->addFieldset('question_form', array('legend'=>Mage::helper('question')->__('Question information')));
 
         $fieldset->addField('name', 'text', array(
             'label' => Mage::helper('question')->__('Name'),
@@ -31,8 +31,7 @@ class Wecko_Question_Block_Adminhtml_Question_Edit_Form extends Mage_Adminhtml_B
         $fieldset->addField('content', 'editor', array(
             'name' => 'content',
             'label' => Mage::helper('question')->__('Comment'),
-            'style' => 'width:98%; height:400px;',
-            'wysiwyg' => false,
+            'style' => 'width:98%; height:200px;',
             'required' => true,
         ));
 

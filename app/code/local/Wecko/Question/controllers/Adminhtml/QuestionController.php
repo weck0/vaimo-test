@@ -31,17 +31,13 @@ class Wecko_Question_Adminhtml_QuestionController extends Mage_Adminhtml_Control
             
             Mage::register('question_data', $questionModel);
             $this->loadLayout();
-            $this->_setActiveMenu('question/items');
-            $this->_addBreadcrumb(Mage::helper('adminhtml')->__('Item Manager'), Mage::helper('adminhtml')->__('Item Manager'));
-            $this->_addBreadcrumb(Mage::helper('adminhtml')->__('Item News'), Mage::helper('adminhtml')->__('Item News'));
             $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
-            $this->_addContent($this->getLayout()->createBlock('question/adminhtml_question_edit'))
-            ->_addLeft($this->getLayout()->createBlock('question/adminhtml_question_edit_tabs'));
+            $this->_addContent($this->getLayout()->createBlock('question/adminhtml_question_edit'));
             $this->renderLayout();
             
         } else {
             
-            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('question')->__('Item does not exist'));
+            Mage::getSingleton('adminhtml/session')->addError(Mage::helper('question')->__('Question does not exist'));
             $this->_redirect('*/*/');
         }
     }

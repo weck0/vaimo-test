@@ -14,19 +14,18 @@ class Wecko_Question_Block_Adminhtml_Question_Edit extends Mage_Adminhtml_Block_
         $this->_objectId = 'id';
         $this->_blockGroup = 'question';
         $this->_controller = 'adminhtml_question';
-        $this->_updateButton('save', 'label', Mage::helper('question')->__('Save Item'));
+        $this->_updateButton('save', 'label', Mage::helper('question')->__('Save Question'));
         $this->_updateButton('delete', 'label', Mage::helper('question')->__('Delete Item'));
+
     }
 
     public function getHeaderText()
     {
         if( Mage::registry('question_data') && Mage::registry('question_data')->getId() ) {
-        return Mage::helper('question')->__("Edit Item '%s'", $this->htmlEscape(Mage::registry('question_data')->getName()));
+        return Mage::helper('question')->__("Edit Question from '%s'", $this->htmlEscape(Mage::registry('question_data')->getName()));
         } else {
             return Mage::helper('question')->__('Add Question');
         }
-
-
     }
 
 }
