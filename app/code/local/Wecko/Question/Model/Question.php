@@ -14,4 +14,33 @@ class Wecko_Question_Model_Question extends Mage_Core_Model_Abstract{
         $this->_init('question/question');
     }
 
+    /**
+     * Save Form
+     */
+    public function saveForm($post)
+    {
+        $date = Mage::getModel('core/date')->gmtDate();
+
+        if(!$post['id']){
+
+            $this->setName($post['name'])
+                ->setContent($post['comment'])
+                ->setEmail($post['email'])
+                ->setCreatedTime($date);
+            $this->save();
+        }else{
+
+            $this->load($post['id']);
+
+            $this->setName($post['name'])
+                ->setContent($post['comment'])
+                ->setEmail($post['email'])
+                ->setUpdateTime($date);
+            $this->save();
+        }
+
+        return true;
+
+    }
+
 }

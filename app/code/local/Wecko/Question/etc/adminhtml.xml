@@ -8,7 +8,7 @@
                 <items module="question">
                     <title>Manage Questions</title>
                     <sort_order>0</sort_order>
-                    <action>Question/adminhtml_Question</action>
+                    <action>question/adminhtml_question</action>
                 </items>
             </children>
         </question>

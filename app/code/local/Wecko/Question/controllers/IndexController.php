@@ -44,18 +44,15 @@ class Wecko_Question_IndexController extends Mage_Core_Controller_Front_Action{
                     throw new Exception();
                 }
 
-                Mage::getModel('question/question');
+                Mage::getModel('question/question')->saveForm($post);
 
-
-
-
-                Mage::getSingleton('customer/session')->addSuccess(Mage::helper('contacts')->__('Your inquiry was submitted and will be responded to as soon as possible. Thank you for contacting us.'));
+                Mage::getSingleton('customer/session')->addSuccess(Mage::helper('question')->__('Your inquiry was submitted and will be responded to as soon as possible. Thank you for contacting us.'));
                 $this->_redirect('*/*/');
 
                 return;
             } catch (Exception $e) {
 
-                Mage::getSingleton('customer/session')->addError(Mage::helper('contacts')->__('Unable to submit your request. Please, try again later'));
+                Mage::getSingleton('customer/session')->addError(Mage::helper('question')->__('Unable to submit your request. Please, try again later'));
                 $this->_redirect('*/*/');
                 return;
             }

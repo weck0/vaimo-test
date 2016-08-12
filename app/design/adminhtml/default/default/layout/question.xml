@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <question_adminhtml_question_index>
+        <reference name="content">
+            <block type="question/adminhtml_question" name="question" />
+        </reference>
+    </question_adminhtml_question_index>
+</layout>
