@@ -2,7 +2,7 @@
 <config>
     <menu>
         <question module="question">
-            <title>Question</title>
+            <title>Questions</title>
             <sort_order>71</sort_order>
             <children>
                 <items module="question">

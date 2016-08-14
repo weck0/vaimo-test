@@ -39,8 +39,6 @@ class Wecko_Question_Model_Question extends Mage_Core_Model_Abstract{
             $this->save();
         }
 
-        return true;
-
     }
 
 }

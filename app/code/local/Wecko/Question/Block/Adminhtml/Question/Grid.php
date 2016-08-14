@@ -12,7 +12,6 @@ class Wecko_Question_Block_Adminhtml_Question_Grid extends Mage_Adminhtml_Block_
     {
         parent::__construct();
         $this->setId('questionGrid');
-        // This is the primary key of the database
         $this->setDefaultSort('question_id');
         $this->setDefaultDir('ASC');
         $this->setSaveParametersInSession(true);
@@ -25,7 +24,7 @@ class Wecko_Question_Block_Adminhtml_Question_Grid extends Mage_Adminhtml_Block_
 
         $this->getMassactionBlock()->addItem('delete', array(
             'label'=> Mage::helper('question')->__('Delete'),
-            'url'  => $this->getUrl('*/*/massDelete', array('' => '')),        // public function massDeleteAction() in Mage_Adminhtml_Tax_RateController
+            'url'  => $this->getUrl('*/*/massDelete', array('' => '')),
             'confirm' => Mage::helper('question')->__('Are you sure?')
         ));
 
@@ -65,8 +64,8 @@ class Wecko_Question_Block_Adminhtml_Question_Grid extends Mage_Adminhtml_Block_
         $this->addColumn('created_time', array(
         'header' => Mage::helper('question')->__('Creation Time'),
         'align' => 'left',
-        'width' => '120px',
-        'type' => 'date',
+        'width' => '150px',
+        'type' => 'datetime',
         'default' => '–',
         'index' => 'created_time',
         ));
@@ -74,8 +73,8 @@ class Wecko_Question_Block_Adminhtml_Question_Grid extends Mage_Adminhtml_Block_
         $this->addColumn('update_time', array(
         'header' => Mage::helper('question')->__('Update Time'),
         'align' => 'left',
-        'width' => '120px',
-        'type' => 'date',
+        'width' => '150px',
+        'type' => 'datetime',
         'default' => '–',
         'index' => 'update_time',
         ));

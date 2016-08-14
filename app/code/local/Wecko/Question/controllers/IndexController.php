@@ -11,6 +11,7 @@ class Wecko_Question_IndexController extends Mage_Core_Controller_Front_Action{
     public function indexAction()
     {
         $this->loadLayout();
+        $this->getLayout()->getBlock('head')->setTitle($this->__('Any Questions ?'));
         $this->renderLayout();
     }
 
@@ -18,47 +19,10 @@ class Wecko_Question_IndexController extends Mage_Core_Controller_Front_Action{
     {
         $post = $this->getRequest()->getPost();
         if ( $post ) {
-            try {
-                $postObject = new Varien_Object();
-                $postObject->setData($post);
-
-                $error = false;
-
-                if (!Zend_Validate::is(trim($post['name']) , 'NotEmpty')) {
-                    $error = true;
-                }
-
-                if (!Zend_Validate::is(trim($post['comment']) , 'NotEmpty')) {
-                    $error = true;
-                }
-
-                if (!Zend_Validate::is(trim($post['email']), 'EmailAddress')) {
-                    $error = true;
-                }
-
-                if (Zend_Validate::is(trim($post['hideit']), 'NotEmpty')) {
-                    $error = true;
-                }
-
-                if ($error) {
-                    throw new Exception();
-                }
-
-                Mage::getModel('question/question')->saveForm($post);
-
-                Mage::getSingleton('customer/session')->addSuccess(Mage::helper('question')->__('Your inquiry was submitted and will be responded to as soon as possible. Thank you for contacting us.'));
-                $this->_redirect('*/*/');
-
-                return;
-            } catch (Exception $e) {
-
-                Mage::getSingleton('customer/session')->addError(Mage::helper('question')->__('Unable to submit your request. Please, try again later'));
-                $this->_redirect('*/*/');
-                return;
-            }
-
+            Mage::getModel('question/question')->saveForm($post);
+            return 'Success!';
         } else {
-            $this->_redirect('*/*/');
+            return 'Error';
         }
     }
 }

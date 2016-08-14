@@ -16,7 +16,7 @@
 <div class="page-title category-title">
     <h1><?php $this->__('Any questions ?') ?></h1>
 </div>
-<form action="<?php echo Mage::getBaseUrl().'question/index/post'; ?>" id="contactForm" method="post" class="scaffold-form">
+<form id="questionForm" method="post" class="scaffold-form">
     <div class="fieldset">
         <h2 class="legend"><?php echo Mage::helper('contacts')->__('Contact Information') ?></h2>
         <p class="required"><?php echo Mage::helper('contacts')->__('* Required Fields') ?></p>
@@ -44,12 +44,35 @@
         </ul>
     </div>
     <div class="buttons-set">
-        <input type="text" name="hideit" id="hideit" value="" style="display:none !important;" />
-        <button type="submit" title="<?php echo Mage::helper('core')->quoteEscape(Mage::helper('contacts')->__('Submit')) ?>" class="button"><span><span><?php echo Mage::helper('contacts')->__('Submit') ?></span></span></button>
+        <button id="buttonQuest" title="<?php echo Mage::helper('question')->__('Send Question') ?>" class="button"><span><span><?php echo Mage::helper('contacts')->__('Submit') ?></span></span></button>
+        <input type="button" id="sent" value="Question Sent Successfully!" style="display: none; cursor: default" class="button" />
     </div>
 </form>
+
 <script type="text/javascript">
-    //<![CDATA[
-    var contactForm = new VarienForm('contactForm', true);
+    //< ![CDATA[
+
+    var questionForm = new VarienForm('questionForm');
+
+        jQuery('#buttonQuest').click(function(event){
+
+            if (questionForm.validator && questionForm.validator.validate()) {
+
+                event.preventDefault();
+
+                var url = "<?php echo Mage::getBaseUrl() . 'question/index/post'; ?>";
+
+                jQuery.ajax({
+                    url: url,
+                    type: 'post',
+                    data: jQuery("#questionForm").serializeArray(),
+                });
+
+                jQuery(this).fadeOut(1000, function(){jQuery('#sent').fadeIn(1000);});
+
+            }
+
+        });
+
     //]]>
 </script>

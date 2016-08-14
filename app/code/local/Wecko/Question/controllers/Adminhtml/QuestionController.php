@@ -31,7 +31,6 @@ class Wecko_Question_Adminhtml_QuestionController extends Mage_Adminhtml_Control
             
             Mage::register('question_data', $questionModel);
             $this->loadLayout();
-            $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
             $this->_addContent($this->getLayout()->createBlock('question/adminhtml_question_edit'));
             $this->renderLayout();
             
@@ -46,29 +45,40 @@ class Wecko_Question_Adminhtml_QuestionController extends Mage_Adminhtml_Control
     {
         $this->_forward('edit');
     }
-    
+
     public function saveAction()
     {
-    if ( $this->getRequest()->getPost() ) {
-        try {
-            $postData = $this->getRequest()->getPost();
-            Mage::getModel('question/question')->saveForm($postData);
+        $date = Mage::getModel('core/date')->gmtDate();
+        $redirectBack = $this->getRequest()->getParam('back', false);
 
-            Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Item was successfully saved'));
-            Mage::getSingleton('adminhtml/session')->setquestionData(false);
-            $this->_redirect('*/*/');
+        if ( $this->getRequest()->getPost() ) {
+            try {
+                $postData = $this->getRequest()->getPost();
+                $questionModel = Mage::getModel('question/question')->load($this->getRequest()->getParam('question_id'));
+                $questionModel->setName($postData['name'])
+                    ->setContent($postData['content'])
+                    ->setEmail($postData['email'])
+                    ->setUpdateTime($date)
+                ->save();
+                Mage::getSingleton('adminhtml/session')->addSuccess(Mage::helper('adminhtml')->__('Question was successfully saved'));
+                Mage::getSingleton('adminhtml/session')->setquestionData(false);
+
+                if ($redirectBack) {
+                    $this->_redirect('*/*/edit', array('id' => $questionModel->getId()));
+                    return;
+                }
+
+                $this->_redirect('*/*/');
+                return;
+                } catch (Exception $e) {
+                Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
+                Mage::getSingleton('adminhtml/session')->setquestionData($this->getRequest()->getPost());
+                $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('question_id')));
             return;
-
-        } catch (Exception $e) {
-            Mage::getSingleton('adminhtml/session')->addError($e->getMessage());
-            Mage::getSingleton('adminhtml/session')->setquestionData($this->getRequest()->getPost());
-            $this->_redirect('*/*/edit', array('id' => $this->getRequest()->getParam('id')));
-        return;
         }
     }
-        $this->_redirect('*/*/');
+            $this->_redirect('*/*/');
     }
-    
     public function deleteAction()
     {
         if( $this->getRequest()->getParam('id') > 0 ) {

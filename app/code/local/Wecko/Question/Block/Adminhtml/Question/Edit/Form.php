@@ -10,8 +10,12 @@ class Wecko_Question_Block_Adminhtml_Question_Edit_Form extends Mage_Adminhtml_B
 
     protected function _prepareForm()
     {
-        $form = new Varien_Data_Form();
-        $this->setForm($form);
+        $model = Mage::getModel('question/question');
+        $form   = new Varien_Data_Form(array(
+            'id'        => 'edit_form',
+            'action'    => $this->getUrl('*/*/save'),
+            'method'    => 'post'
+        ));
         $fieldset = $form->addFieldset('question_form', array('legend'=>Mage::helper('question')->__('Question information')));
 
         $fieldset->addField('name', 'text', array(
@@ -30,18 +34,20 @@ class Wecko_Question_Block_Adminhtml_Question_Edit_Form extends Mage_Adminhtml_B
 
         $fieldset->addField('content', 'editor', array(
             'name' => 'content',
-            'label' => Mage::helper('question')->__('Comment'),
+            'label' => Mage::helper('question')->__('Content'),
             'style' => 'width:98%; height:200px;',
             'required' => true,
         ));
 
-        if ( Mage::getSingleton('adminhtml/session')->getquestionData() )
-        {
-            $form->setValues(Mage::getSingleton('adminhtml/session')->getquestionData());
-            Mage::getSingleton('adminhtml/session')->setquestionData(null);
-        } elseif ( Mage::registry('question_data') ) {
-            $form->setValues(Mage::registry('question_data')->getData());
-        }
+
+        $modelPk = $model->getResource()->getIdFieldName();
+        $fieldset->addField($modelPk, 'hidden', array(
+            'name' => $modelPk,
+        ));
+
+        $form->setValues(Mage::registry('question_data')->getData());
+        $form->setUseContainer(true);
+        $this->setForm($form);
 
         return parent::_prepareForm();
     }

@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
     <question_adminhtml_question_index>
+        <referense name="head">
+            <action method="setTitle" translate="title"><title>Manage Questions</title></action>
+        </referense>
         <reference name="content">
             <block type="question/adminhtml_question" name="question" />
         </reference>
