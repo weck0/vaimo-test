@@ -2,6 +2,7 @@ app/etc/local.xml
 downloader/.cache/*
 downloader/cache.cfg
 downloader/connect.cfg
+limesharp-developer-test
 delta
 deltaold
 docs
