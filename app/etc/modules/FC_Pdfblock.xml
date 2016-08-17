@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <FC_Pdfblock>
+            <active>true</active>
+            <codePool>local</codePool>
+        </FC_Pdfblock>
+    </modules>
+</config>

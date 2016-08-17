@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <FC_Pdfblock>
+            <version>0.1.0</version>
+        </FC_Pdfblock>
+    </modules>
+    <global>
+        <models>
+            <sales>
+                <!-- Rewriting the getPdf() function from Mage/Sales/Order/Pdf/Invoice.php -->
+                <rewrite>
+                    <order_pdf_invoice>FC_Pdfblock_Model_Order_Pdf_Invoice</order_pdf_invoice>
+                </rewrite>
+            </sales>
+            <fc_pdfblock>
+                <class>FC_Pdfblock_Model</class>
+            </fc_pdfblock>
+        </models>
+    </global>
+</config>
